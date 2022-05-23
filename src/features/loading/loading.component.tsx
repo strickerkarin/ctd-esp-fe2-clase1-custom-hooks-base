@@ -1,7 +1,9 @@
 import { FC } from 'react';
+import { useLanguage } from 'features/language';
 
 const LoadingComponent: FC = () => {
-  return <div>Loading...</div>;
+  const { t } = useLanguage();
+  return <div>{t('oading')}...</div>;
 };
 
 export default LoadingComponent;

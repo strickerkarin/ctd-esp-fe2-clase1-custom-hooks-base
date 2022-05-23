@@ -1,15 +1,13 @@
 import { FaBars, FaTimes } from 'react-icons/fa';
+import useDisclosure from 'features/modal/use-disclosure';
 import { SearchBar } from 'features/search';
-import {FC, useState} from 'react';
+import { FC } from 'react';
+import { useLanguage } from 'features/language';
 import { NavLink } from 'react-router-dom';
 
-type NavMobileProps = {
-  t: (key: string) => string
-}
-
-const NavMobile: FC<NavMobileProps> = ({t}: NavMobileProps) => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-  const toggle = () => setOpen((value) => !value);
+const NavMobile: FC = () => {
+  const { isOpen, toggle } = useDisclosure();
+  const { t } = useLanguage();
 
   return (
     <div className={`container mobile-nav`}>
