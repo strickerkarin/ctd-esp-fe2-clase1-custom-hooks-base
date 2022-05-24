@@ -37,23 +37,22 @@ const CharactersComponent: FC<CharactersComponentProps> = ({
   return (
     <>
       <div className={'characters'}>
-      <Modal visible={modalIsOpen} close={closeModal} />
-        {charactersArray.map((iHateThisChars) => (
-          <div className={'card'} key={iHateThisChars.id}>
+        <Modal visible={modalIsOpen} close={closeModal} />
+        {charactersArray.map((character) => (
+          <div className={'card'} key={character.id}>
             <div className={'card-image'} onClick={toggleModal}>
-              <img src={iHateThisChars.image} />
+              <img src={character.image} />
             </div>
             <div className={'card-body'}>
-              <span>{iHateThisChars.name}</span>
+              <span>{character.name}</span>
               <FollowingButtonComponent
-                isFav={followingIds.indexOf(iHateThisChars.id) >= 0}
-                onToggleFavorite={(setFav) => onToggleFavorite(iHateThisChars, setFav)}
+                isFav={followingIds.indexOf(character.id) >= 0}
+                onToggleFavorite={(setFav) => onToggleFavorite(character, setFav)}
               />
             </div>
           </div>
         ))}
       </div>
-     
     </>
   );
 };

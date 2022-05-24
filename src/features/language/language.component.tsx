@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useLanguage } from 'features/language/index';
 
 const LanguageComponent: FC = () => {
-const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <div className={'language'}>

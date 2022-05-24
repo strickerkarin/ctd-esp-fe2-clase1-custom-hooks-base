@@ -26,16 +26,16 @@ export const LanguageProvider: FC = ({ children }) => {
     () => ({
       language,
       setLanguage,
-      t: (key: string) => {     
+      t: (key: string) => {
         switch (language) {
-          case 'SPANISH':
-            return esTranslations[key];
-          case 'ENGLISH':
-            return enTranslations[key];
-          case 'PORTUGUESE':
-            return ptTranslations[key];
-          default:
-            return key;
+        case 'SPANISH':
+          return esTranslations[key];
+        case 'ENGLISH':
+          return enTranslations[key];
+        case 'PORTUGUESE':
+          return ptTranslations[key];
+        default:
+          return key;
         }
       }
     }),

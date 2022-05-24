@@ -6,9 +6,9 @@ type UseDisclosureType = {
 };
 
 const useDisclosure = (initialValue = false): UseDisclosureType => {
-    const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(initialValue);
 
-    const toggle = () => setValue((value) => !value);
+  const toggle = () => setValue((value) => !value);
 
   return { isOpen: value, toggle };
 };

@@ -3,7 +3,7 @@ import { useLanguage } from 'features/language';
 
 const LoadingComponent: FC = () => {
   const { t } = useLanguage();
-  return <div>{t('oading')}...</div>;
+  return <div>{t('loading')}...</div>;
 };
 
 export default LoadingComponent;

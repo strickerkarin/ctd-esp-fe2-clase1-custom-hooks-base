@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+const INITIAL_PAGE = 1;
+
 export type LS = {
-        query: string;
+  query: string;
   page: number;
 };
 
-const s: LS = {
+const initialState: LS = {
   query: '',
-  page: 1
+  page: INITIAL_PAGE
 };
 
 const locationsSlice = createSlice({
   name: 'locations',
-  initialState: s,
+  initialState: initialState,
   reducers: {
     searchLocations: (state, action: PayloadAction<string>) => {
       state.query = action.payload;
