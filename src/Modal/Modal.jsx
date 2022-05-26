@@ -1,6 +1,6 @@
 import './modal.css';
 
-export default function Modal({ visible, close }) {
+export default function Modal({ visible, close, title, text }) {
   return (
     <>
       {visible && (
@@ -9,11 +9,9 @@ export default function Modal({ visible, close }) {
             <span className="close" onClick={close}>
               x
             </span>
-            <h2>Modal Window</h2>
+            <h2>{title}</h2>
             <div className="content">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis deserunt corrupti, ut
-              fugit magni qui quasi nisi amet repellendus non fuga omnis a sed impedit explicabo
-              accusantium nihil doloremque consequuntur.
+              {text}
             </div>
             <div className="actions">
               <button className="toggle-button" onClick={close}>

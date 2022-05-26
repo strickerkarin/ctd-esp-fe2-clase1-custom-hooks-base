@@ -9,6 +9,7 @@ import { FollowingButtonComponent } from 'features/following/button';
 import Character from 'features/characters/characters.types';
 import Modal from '../../Modal/Modal';
 import useDisclosure from '../../hooks/useDisclosure';
+import { Card } from './Card';
 
 export type CharactersComponentProps = {
   rickIDDS: number[];
@@ -37,20 +38,19 @@ const CharactersComponent: FC<CharactersComponentProps> = ({
   return (
     <>
       <div className={'characters'}>
-        <Modal visible={modalIsOpen} close={closeModal} />
+        <Modal visible={modalIsOpen} close={closeModal} title={'name'} text={'Description'} />
         {charactersArray.map((character) => (
-          <div className={'card'} key={character.id}>
-            <div className={'card-image'} onClick={toggleModal}>
-              <img src={character.image} />
-            </div>
-            <div className={'card-body'}>
-              <span>{character.name}</span>
-              <FollowingButtonComponent
-                isFav={followingIds.indexOf(character.id) >= 0}
-                onToggleFavorite={(setFav) => onToggleFavorite(character, setFav)}
+          <Card key={character.id}>
+            {console.log(character)}
+            <Card.Picture src={character.image} alt={character.name} toggleModal={toggleModal} />
+            <Card.Content character={character}>
+              <Card.Actions
+                character={character}
+                followingIds={followingIds}
+                onToggleFavorite={onToggleFavorite}
               />
-            </div>
-          </div>
+            </Card.Content>
+          </Card>
         ))}
       </div>
     </>
