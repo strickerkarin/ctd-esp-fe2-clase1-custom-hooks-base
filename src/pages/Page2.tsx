@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LocationDetailContainer } from 'features/locations/detail';
+import { LoadContent } from '../features/loadContent/LoadContent';
 
 /**
  * Location page
@@ -19,10 +20,13 @@ const Page2: FC = () => {
 
     return <></>;
   }
+
+  const LocationDetailContainertWithLoading = LoadContent(LocationDetailContainer);
+
   return (
     <div>
       <div className={'container'}>
-        <LocationDetailContainer id={parseInt(params.id, 10)} />
+        <LocationDetailContainertWithLoading id={parseInt(params.id, 10)} />
       </div>
     </div>
   );

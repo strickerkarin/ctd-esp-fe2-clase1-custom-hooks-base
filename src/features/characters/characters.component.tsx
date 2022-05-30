@@ -13,18 +13,24 @@ import { Card } from './Card';
 
 export type CharactersComponentProps = {
   rickIDDS: number[];
+  loadingComponent?: any;
 };
 
 const CharactersComponent: FC<CharactersComponentProps> = ({
-  rickIDDS
+  rickIDDS,
+  loadingComponent
 }: CharactersComponentProps) => {
   const { data: characters, error, isLoading } = useGetCharactersQuery({ ids: rickIDDS });
   const dispatch = useAppDispatch();
   const followingIds = useAppSelector((state) => state.following.followingIds);
   const { isOpen: modalIsOpen, close: closeModal, toggle: toggleModal } = useDisclosure();
 
-  if (isLoading) return <div>Loading characters...</div>;
+  if (isLoading) {
+    return <>{loadingComponent()}</>;
+  }
+
   if (error || !characters) return <div>Error when loading. Please try again later.</div>;
+
   const charactersArray = Array.isArray(characters) ? characters : [characters];
 
   const onToggleFavorite = (character: Character, setFav: boolean) => {
@@ -37,11 +43,10 @@ const CharactersComponent: FC<CharactersComponentProps> = ({
 
   return (
     <>
-      <div className={'characters'}>
-        <Modal visible={modalIsOpen} close={closeModal} title={'name'} text={'Description'} />
+      <div className="characters">
+        <Modal visible={modalIsOpen} close={closeModal} title="name" text="Description" />
         {charactersArray.map((character) => (
-          <Card key={character.id}>
-            {console.log(character)}
+          <Card key={character.id}>        
             <Card.Picture src={character.image} alt={character.name} toggleModal={toggleModal} />
             <Card.Content character={character}>
               <Card.Actions

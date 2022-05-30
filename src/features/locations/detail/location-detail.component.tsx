@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { CharactersComponent } from 'features/characters';
 import { Location } from 'features/locations';
+import { LoadContent } from '../../loadContent/LoadContent';
 
 export type LocationDetailComponentProps = {
   location?: Location;
@@ -14,13 +15,15 @@ const LocationDetailComponent: FC<LocationDetailComponentProps> = ({
     parseInt(resident.split('character')[1].replace('/', ''), 10)
   );
 
+  const CharactersComponentWithLoading = LoadContent(CharactersComponent);
+
   return (
     <div>
       <h2>
         #{location.id} - {location.name}
       </h2>
       <h3>{location.dimension}</h3>
-      <CharactersComponent rickIDDS={characterIds} />
+      <CharactersComponentWithLoading rickIDDS={characterIds} />
     </div>
   );
 };
