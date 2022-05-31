@@ -4,7 +4,7 @@ import { useAppSelector } from 'store/hooks';
 
 const FolComp: FC = () => {
   const { followingIds } = useAppSelector((state) => state.following);
-  return <div>{followingIds.length > 0 && <CharactersComponent rickIDDS={followingIds} />}</div>;
+  return <div>{followingIds.length > 0 && <CharactersComponent charactersIds={followingIds} />}</div>;
 };
 
 export default FolComp;

@@ -1,29 +1,20 @@
 import { FC } from 'react';
 import { useGetCharactersQuery } from 'features/characters/characters.endpoints';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import {
-  addCharacterToFollowingList,
-  removeCharacterToFollowingList
-} from 'features/following/following.slices';
-import { FollowingButtonComponent } from 'features/following/button';
-import Character from 'features/characters/characters.types';
 import Modal from '../../Modal/Modal';
 import useDisclosure from '../../hooks/useDisclosure';
-import { Card } from './Card';
+import CharacterComponent from './Character.component';
 
 export type CharactersComponentProps = {
-  rickIDDS: number[];
+  charactersIds: number[];
   loadingComponent?: any;
 };
 
 const CharactersComponent: FC<CharactersComponentProps> = ({
-  rickIDDS,
+  charactersIds,
   loadingComponent
 }: CharactersComponentProps) => {
-  const { data: characters, error, isLoading } = useGetCharactersQuery({ ids: rickIDDS });
-  const dispatch = useAppDispatch();
-  const followingIds = useAppSelector((state) => state.following.followingIds);
-  const { isOpen: modalIsOpen, close: closeModal, toggle: toggleModal } = useDisclosure();
+  const { data: characters, error, isLoading } = useGetCharactersQuery({ ids: charactersIds });
+
 
   if (isLoading) {
     return <>{loadingComponent()}</>;
@@ -33,29 +24,12 @@ const CharactersComponent: FC<CharactersComponentProps> = ({
 
   const charactersArray = Array.isArray(characters) ? characters : [characters];
 
-  const onToggleFavorite = (character: Character, setFav: boolean) => {
-    if (setFav) {
-      dispatch(addCharacterToFollowingList(character.id));
-    } else {
-      dispatch(removeCharacterToFollowingList(character.id));
-    }
-  };
-
   return (
     <>
       <div className="characters">
-        <Modal visible={modalIsOpen} close={closeModal} title="name" text="Description" />
+       
         {charactersArray.map((character) => (
-          <Card key={character.id}>        
-            <Card.Picture src={character.image} alt={character.name} toggleModal={toggleModal} />
-            <Card.Content character={character}>
-              <Card.Actions
-                character={character}
-                followingIds={followingIds}
-                onToggleFavorite={onToggleFavorite}
-              />
-            </Card.Content>
-          </Card>
+          <CharacterComponent key={character.id} character={character}></CharacterComponent>
         ))}
       </div>
     </>
